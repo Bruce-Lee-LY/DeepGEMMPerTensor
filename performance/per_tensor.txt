@@ -1,0 +1,65 @@
+GPU: H20
+CUDA: 12.4
+CUDA Driver: 550.163.01
+PyTorch: 2.5.1
+
+Testing GEMM Per Tensor:
+ > Perf (m=   64, n= 7168, k=  576):    7 us | throughput:   72 TFLOPS,  695 GB/s
+ > Perf (m=   64, n= 2112, k= 7168):   15 us | throughput:  131 TFLOPS, 1070 GB/s
+ > Perf (m=   64, n=24576, k= 1536):   24 us | throughput:  199 TFLOPS, 1691 GB/s
+ > Perf (m=   64, n=32768, k=  512):   14 us | throughput:  149 TFLOPS, 1460 GB/s
+ > Perf (m=   64, n= 7168, k=16384):   66 us | throughput:  228 TFLOPS, 1815 GB/s
+ > Perf (m=   64, n= 4096, k= 7168):   21 us | throughput:  182 TFLOPS, 1472 GB/s
+ > Perf (m=   64, n= 7168, k= 2048):   12 us | throughput:  157 TFLOPS, 1312 GB/s
+ > Perf (m=  128, n= 7168, k=  576):   10 us | throughput:  108 TFLOPS,  617 GB/s
+ > Perf (m=  128, n= 2112, k= 7168):   20 us | throughput:  194 TFLOPS,  829 GB/s
+ > Perf (m=  128, n=24576, k= 1536):   41 us | throughput:  233 TFLOPS, 1068 GB/s
+ > Perf (m=  128, n=32768, k=  512):   22 us | throughput:  191 TFLOPS, 1123 GB/s
+ > Perf (m=  128, n= 7168, k=16384):  116 us | throughput:  260 TFLOPS, 1049 GB/s
+ > Perf (m=  128, n= 4096, k= 7168):   33 us | throughput:  226 TFLOPS,  944 GB/s
+ > Perf (m=  128, n= 7168, k= 2048):   19 us | throughput:  198 TFLOPS,  885 GB/s
+ > Perf (m= 4096, n= 7168, k=  576):  152 us | throughput:  223 TFLOPS,  430 GB/s
+ > Perf (m= 4096, n= 2112, k= 7168):  461 us | throughput:  269 TFLOPS,  134 GB/s
+ > Perf (m= 4096, n=24576, k= 1536): 1122 us | throughput:  276 TFLOPS,  219 GB/s
+ > Perf (m= 4096, n=32768, k=  512):  554 us | throughput:  248 TFLOPS,  518 GB/s
+ > Perf (m= 4096, n= 7168, k=16384): 3495 us | throughput:  275 TFLOPS,   70 GB/s
+ > Perf (m= 4096, n= 4096, k= 7168):  900 us | throughput:  267 TFLOPS,  102 GB/s
+ > Perf (m= 4096, n= 7168, k= 2048):  465 us | throughput:  259 TFLOPS,  176 GB/s
+
+Testing grouped contiguous GEMM Per Tensor:
+ > Perf (num_groups= 4, expected_m_per_group=8192, n=4096, k=7168): 7346 us | throughput:  273 TFLOPS,   87 GB/s
+ > Perf (num_groups= 4, expected_m_per_group=8192, n=7168, k=2048): 3513 us | throughput:  274 TFLOPS,  170 GB/s
+ > Perf (num_groups= 8, expected_m_per_group=4096, n=4096, k=7168): 7267 us | throughput:  272 TFLOPS,  104 GB/s
+ > Perf (num_groups= 8, expected_m_per_group=4096, n=7168, k=2048): 4187 us | throughput:  268 TFLOPS,  178 GB/s
+ > Perf (num_groups=32, expected_m_per_group= 256, n=4096, k=7168): 2188 us | throughput:  223 TFLOPS,  488 GB/s
+ > Perf (num_groups=32, expected_m_per_group= 256, n=7168, k=2048): 1132 us | throughput:  223 TFLOPS,  539 GB/s
+
+Testing grouped masked GEMM Per Tensor:
+ > Perf (num_groups=1, expected_m_per_group=1024, n=4096, k=7168):  233 us | throughput:  193 TFLOPS,  177 GB/s
+ > Perf (num_groups=1, expected_m_per_group=1024, n=7168, k=2048):  120 us | throughput:  226 TFLOPS,  249 GB/s
+ > Perf (num_groups=2, expected_m_per_group= 512, n=4096, k=7168):  347 us | throughput:  181 TFLOPS,  216 GB/s
+ > Perf (num_groups=2, expected_m_per_group= 512, n=7168, k=2048):  197 us | throughput:  179 TFLOPS,  249 GB/s
+ > Perf (num_groups=4, expected_m_per_group= 256, n=4096, k=7168):  347 us | throughput:  154 TFLOPS,  379 GB/s
+ > Perf (num_groups=4, expected_m_per_group= 256, n=7168, k=2048):  199 us | throughput:  153 TFLOPS,  381 GB/s
+
+Testing weight gradient GEMM Per Tensor:
+ > Performance (m= 7168, n= 2112, k= 4096):  494 us | throughput:  251 TFLOPS,  138 GB/s
+ > Performance (m= 1536, n=24576, k= 4096): 1135 us | throughput:  272 TFLOPS,  161 GB/s
+ > Performance (m=  512, n=32768, k= 4096):  547 us | throughput:  251 TFLOPS,  310 GB/s
+ > Performance (m=16384, n= 7168, k= 4096): 3566 us | throughput:  270 TFLOPS,   93 GB/s
+ > Performance (m= 7168, n= 4096, k= 4096):  908 us | throughput:  265 TFLOPS,  115 GB/s
+ > Performance (m= 2048, n= 7168, k= 4096):  456 us | throughput:  264 TFLOPS,  147 GB/s
+ > Performance (m= 7168, n= 2112, k= 8192):  983 us | throughput:  252 TFLOPS,  108 GB/s
+ > Performance (m= 1536, n=24576, k= 8192): 2230 us | throughput:  277 TFLOPS,  130 GB/s
+ > Performance (m=  512, n=32768, k= 8192): 1072 us | throughput:  256 TFLOPS,  286 GB/s
+ > Performance (m=16384, n= 7168, k= 8192): 7020 us | throughput:  274 TFLOPS,   61 GB/s
+ > Performance (m= 7168, n= 4096, k= 8192): 1785 us | throughput:  269 TFLOPS,   85 GB/s
+ > Performance (m= 2048, n= 7168, k= 8192):  894 us | throughput:  269 TFLOPS,  117 GB/s
+
+Testing grouped weight gradient GEMM Per Tensor:
+ > Performance (num_groups=4, m= 7168, n= 4096, avg_k= 4096): 3637 us | throughput:  264 TFLOPS,  115 GB/s
+ > Performance (num_groups=4, m= 2048, n= 7168, avg_k= 4096): 1845 us | throughput:  261 TFLOPS,  145 GB/s
+ > Performance (num_groups=4, m= 7168, n= 4096, avg_k= 8192): 7142 us | throughput:  269 TFLOPS,   85 GB/s
+ > Performance (num_groups=4, m= 2048, n= 7168, avg_k= 8192): 3577 us | throughput:  269 TFLOPS,  117 GB/s
+ > Performance (num_groups=8, m= 7168, n= 4096, avg_k= 4096): 7279 us | throughput:  264 TFLOPS,  115 GB/s
+ > Performance (num_groups=8, m= 2048, n= 7168, avg_k= 4096): 3696 us | throughput:  260 TFLOPS,  145 GB/s
